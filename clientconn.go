@@ -421,6 +421,11 @@ func (cc *ClientConn) newAddrConn(addr Address, skipWait bool) error {
 	return nil
 }
 
+// Transport getter
+func (cc *ClientConn) Transport(ctx context.Context, opts BalancerGetOptions) (transport.ClientTransport, func(), error) {
+	return cc.getTransport(ctx, opts)
+}
+
 func (cc *ClientConn) getTransport(ctx context.Context, opts BalancerGetOptions) (transport.ClientTransport, func(), error) {
 	addr, put, err := cc.dopts.balancer.Get(ctx, opts)
 	if err != nil {
