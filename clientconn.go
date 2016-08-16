@@ -341,6 +341,11 @@ type ClientConn struct {
 	conns map[Address]*addrConn
 }
 
+// Authority getter
+func (cc *ClientConn) Authority() string {
+	return cc.authority
+}
+
 func (cc *ClientConn) lbWatcher() {
 	for addrs := range cc.dopts.balancer.Notify() {
 		var (
